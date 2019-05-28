@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+        <script src="js/socket.io-2.1.0.js"></script>
+        <script src="js/jquery-1.11.1.js"></script>
+		<script>
+            var socket = io();
+            var devices='{}';
+            var roles= '{}';
+            var url = window.location.href.split("device=");
+            deviceName = url[1];
+            socket.on('intercomData', function (msg) {
+                $('#clock').html(msg.clock);
+                if (JSON.stringify(devices) !== JSON.stringify(msg.devices)) {
+                    devices = msg.devices;
+                }
+                if (JSON.stringify(roles) !== JSON.stringify(msg.roles)) {
+                    roles = msg.roles;
+                }
+            });
+            function checkVarAvail() {
+                if (Object.keys(devices)[0] != 0 && Object.keys(roles)[0] != 0) {
+                    generateRoleDropdown(roles);
+                    if (devices[deviceName]["channels"] != 0) {
+                        generateFormTable();
+                        generateFormTableContent(devices,roles);
+                    } else {
+                        var currentId = document.getElementById('assignIntercom');
+                        var divData = '<form id ="frm1" name="assignIntercom">';
+                        divData += '<div class="deviceTable"><table id="assign-table"></table>';
+                        divData += '</form><p>THIS DEVICE CAN NOT BROADCAST!</p><p>OBSERVE THAT CHANGES WILL BE STORED BUT ONLY APPLIED WHEN DEVICE IS ONLINE</p></div>';
+                        divData += '<button class="button" onclick="sendConfig()">Set role</button>';
+                        currentId.innerHTML = divData;
+                    }
+                    //console.log("Total time: " + (Date.now() - start) + "ms");
+                    clearInterval(t);
+                }
+            }
+            // CHECK EVERY 10MS IF DEVICE AND ROLE DATA HAS ARRIVED
+            var start = Date.now();
+            var t=setInterval(checkVarAvail, 10);
+
+            function generateRoleDropdown(roles) {
+                //console.log("generate Roles: " + Date.now());
+                var currentId = document.getElementById('roleDrop');
+                var divData = 'DEVICE: <br/>' + deviceName + '<br/><br/>';
+                divData += 'CURRENT ROLE: <br/><select name="role" id="role">';
+                for (var i = 0; i < Object.keys(roles).length; i++) {
+                    if (devices[deviceName]["role"] == Object.keys(roles)[i]) {
+                        divData += '<option value="'+ Object.keys(roles)[i] +'" selected>' + Object.keys(roles)[i] + '</option>';
+                    } else {
+                        divData += '<option value="'+ Object.keys(roles)[i] +'">' + Object.keys(roles)[i] + '</option>'; 
+                    }
+                }
+                divData += '</select><br /><br />';
+                divData += '</div>';
+                currentId.innerHTML = divData;
+            }
+            function generateFormTable() {
+                //console.log("form table: " + Date.now());
+                var currentId = document.getElementById('assignIntercom');
+                var divData = '<form id ="frm1" name="assignIntercom">';
+                divData += '<div class="deviceTable"><table id="assign-table"></table>';
+                divData += '</form><p>OBSERVE THAT CHANGES WILL BE STORED BUT ONLY APPLIED WHEN DEVICE IS ONLINE</p></div>';
+                divData += '<button class="button" onclick="sendConfig()">Set config</button>';
+                currentId.innerHTML = divData;
+            }
+            function generateFormTableContent(devices,roles) {
+                //console.log("generate table content: " + Date.now());
+                var counter = 1;
+                var table = document.getElementById('assign-table');
+                var row = table.insertRow(0);
+                var cell1 = row.insertCell(0);
+                cell1.innerHTML = "ASSIGN";
+                var cell2 = row.insertCell(1);
+                cell2.innerHTML = "DESCRIPTION";
+                for (var i = 0; i < devices[deviceName]["channels"]; i++) {
+                    var cell1 = row.insertCell(i+1);
+                    cell1.innerHTML = "CH " + (i+1);
+                }
+                for (var i = 0; i < Object.keys(roles).length; i++) {
+                    var row = table.insertRow(i+1);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    cell1.innerHTML = Object.keys(roles)[i];
+                    cell2.innerHTML = roles[Object.keys(roles)[i]]["desc"];
+                    for (var j = 0; j < devices[deviceName]["channels"]; j++) {
+                        var cell1 = row.insertCell(j+1);
+                        if (devices[deviceName]["ch"+(j+1)].split(',').indexOf(Object.keys(roles)[i]) > -1) {
+                            cell1.innerHTML = '<input type="checkbox" name="'+ (j+1) +'" id="button'+counter+'" value="'+Object.keys(roles)[i]+'" checked><label for="button'+counter+'"></label>';
+                        } else {
+                            cell1.innerHTML = '<input type="checkbox" name="'+ (j+1) +'" id="button'+counter+'" value="'+Object.keys(roles)[i]+'"><label for="button'+counter+'"></label>';
+                        }
+                        counter++;
+                    }
+                }
+            }
+            function sendConfig(){
+                var roleSelect = document.getElementById("role");
+                var role = roleSelect.options[roleSelect.selectedIndex].value;
+                var channelData = [];
+                for (var i = 0; i < devices[deviceName]["channels"]; i++ ) {
+                    channelData[i] = [];
+                }
+                var form = document.getElementById('frm1');
+                for (var i = 0; i < form.elements.length; i++ ) {
+                    if (form.elements[i].type == 'checkbox') {
+                        if (form.elements[i].checked == true) {
+                            for (var j = 0; j < channelData.length; j++ ) {
+                                if ((form.elements[i].name) == (j+1).toString()) {
+                                    channelData[j].push(form.elements[i].value);
+                                }
+                            }
+                        }
+                    }
+                }
+                //console.log(channelData);
+                socket.emit('updateDevice', deviceName, role, channelData, function (response) {
+                    if (response == 200) {
+                        //console.log("Everything ok");
+                        window.location.href = '/';
+                    }
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div class="config">
+            <div class="roleDrop" id="roleDrop"></div>
+            <div class="assignIntercom" id="assignIntercom"></div>
+        </div>
+    </body>
+</html>

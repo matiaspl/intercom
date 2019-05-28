@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+        <script src="js/socket.io-2.1.0.js"></script>
+        <script src="js/jquery-1.11.1.js"></script>
+		<script>
+            var socket = io();
+            var devices='{}';
+            var deviceLoop='{}';
+            var roles= '{}';
+            var firstDraw = 1;
+            var updateTimer = setInterval(updateTalkToDisplay, 500);
+
+            function updateTalkToDisplay() {
+                for (i = 0; i < Object.keys(devices).length; i++) {
+                    updateChDiv(i, devices[Object.keys(devices)[i]]["channels"]);
+                }
+            }
+
+            socket.on('intercomData', function (msg) {
+                $('#clock').html(msg.clock);
+                if (JSON.stringify(devices) !== JSON.stringify(msg.devices)) {
+                    devices = msg.devices;
+                    updateDevices(devices);
+                }
+                if (JSON.stringify(roles) !== JSON.stringify(msg.roles)) {
+                    roles = msg.roles;
+                }
+            });
+
+            function updateDevicesGenChDiv(i, chNum, divData){
+                for (j = 1; j <= chNum; j++) {
+                    var talkTo = devices[Object.keys(devices)[i]]['ch' + j].split(",");
+                    divData += '<div class="db_ch' + j +'" id="' + Object.keys(devices)[i] + 'Ch' + j + '">' + talkTo[0] + '</div>';
+                }
+                return divData;
+            }
+
+            function updateChDiv(i, chNum){
+                for (j = 1; j <= chNum; j++) {
+                    var talkTo = devices[Object.keys(devices)[i]]["ch" + j].split(",");
+                    var totalTalkTo = talkTo.length;
+                    if (Number.isInteger(deviceLoop[Object.keys(deviceLoop)[i]]["ch" + j])) {
+                        var lastShowTalkTo = deviceLoop[Object.keys(deviceLoop)[i]]["ch" + j];
+                    } else {
+                        var lastShowTalkTo = 0;
+                    }
+                    if (lastShowTalkTo < totalTalkTo - 1) {
+                        lastShowTalkTo += 1;
+                        var nowTalkingTo = roles[devices[Object.keys(devices)[i]]["role"]]["talksto"];
+                        if (nowTalkingTo.includes(talkTo[lastShowTalkTo])) {
+                            document.getElementById(Object.keys(devices)[i] + "Ch" + j).innerHTML = talkTo[lastShowTalkTo];
+                            document.getElementById(Object.keys(devices)[i] + "Ch" + j).classList.add('db_ch_talk');
+                        } else {
+                            document.getElementById(Object.keys(devices)[i] + "Ch" + j).innerHTML = talkTo[lastShowTalkTo];
+                            document.getElementById(Object.keys(devices)[i] + "Ch" + j).classList.remove('db_ch_talk');
+                        }
+                        deviceLoop[Object.keys(deviceLoop)[i]]["ch" + j] = lastShowTalkTo;
+                    } else {
+                        lastShowTalkTo = 0;
+                        var nowTalkingTo = roles[devices[Object.keys(devices)[i]]["role"]]["talksto"];
+                        if (nowTalkingTo.includes(talkTo[lastShowTalkTo])) {
+                            document.getElementById(Object.keys(devices)[i] + "Ch" + j).innerHTML = talkTo[lastShowTalkTo];
+                            document.getElementById(Object.keys(devices)[i] + "Ch" + j).classList.add('db_ch_talk');
+                        } else {
+                            document.getElementById(Object.keys(devices)[i] + "Ch" + j).innerHTML = talkTo[lastShowTalkTo];
+                            document.getElementById(Object.keys(devices)[i] + "Ch" + j).classList.remove('db_ch_talk');
+                        }
+                        deviceLoop[Object.keys(deviceLoop)[i]]["ch" + j] = lastShowTalkTo;
+                    }
+                    
+                }
+            }
+
+            function updateDevices(devices) {
+                if (firstDraw == 1){
+                    // FIRST TIME MAKE NEEDED DIVS
+                    var currentId = document.getElementById('devicelist');
+                    for (i = 0; i < Object.keys(devices).length; i++) {
+                        var divData = '<div class="devicebox_' + devices[Object.keys(devices)[i]]["channels"] + 'ch">';
+                        divData += '    <div class="db_device" id="' + Object.keys(devices)[i] + '">' + Object.keys(devices)[i] + '</div>';
+                        divData += '    <div class="db_role" id="' + Object.keys(devices)[i] + 'Role">' + devices[Object.keys(devices)[i]]["role"] + '</div>';
+                        if (devices[Object.keys(devices)[i]]["state"] == "ONLINE") {
+                            divData += '    <div class="db_status" id="' + Object.keys(devices)[i] + 'State"><img src="../img/online.png"></div>';
+                        } else {
+                            divData += '    <div class="db_status" id="' + Object.keys(devices)[i] + 'State"><img src="../img/offline.png"></div>';
+                        }
+                        divData += '    <div class="db_setup" id="' + Object.keys(devices)[i] + 'Status"><a href="config?device=' + Object.keys(devices)[i] + '"><img src="../img/setup.png" alt="Setup"></a></div>';
+                        divData += '    <div class="db_siglev" id="' + Object.keys(devices)[i] + 'Level">' + devices[Object.keys(devices)[i]]["siglevel"] + '</div>';
+                        divData += '    <div class="db_sigqual" id="' + Object.keys(devices)[i] + 'Quality">' + devices[Object.keys(devices)[i]]["sigquality"] + '</div>';
+                        // CALL FUNCTION TO GENERATE CHANNEL DIVS
+                        divData = updateDevicesGenChDiv(i, devices[Object.keys(devices)[i]]["channels"], divData);
+                        divData += '</div>';
+                        currentId.innerHTML += divData;
+                    }
+                    // MAKE COPY OF THE DEVICES TO BE ABLE TO KNOW WHAT TO SHOW IN CASE OF MULTIPLE TALKTO DESTINATIONS
+                    deviceLoop = JSON.parse(JSON.stringify(devices));
+                    firstDraw = 0;
+                } else {
+                    // NOT FIRST TIME, UPDATE
+                    for (i = 0; i < Object.keys(devices).length; i++) {
+                        var deviceId = document.getElementById(Object.keys(devices)[i]);
+                        deviceId.innerHTML = Object.keys(devices)[i];
+                        var roleId = document.getElementById(Object.keys(devices)[i] + "Role");
+                        roleId.innerHTML = devices[Object.keys(devices)[i]]["role"];
+                        var stateId = document.getElementById(Object.keys(devices)[i] + "State");
+                        if (devices[Object.keys(devices)[i]]["state"] == "ONLINE") {
+                            stateId.innerHTML = '<img src="../img/online.png">';
+                        } else {
+                            stateId.innerHTML = '<img src="../img/offline.png">';
+                        }
+                        var siqqualityId = document.getElementById(Object.keys(devices)[i] + "Quality");
+                        siqqualityId.innerHTML = devices[Object.keys(devices)[i]]["sigquality"];
+                        var siglevelId = document.getElementById(Object.keys(devices)[i] + "Level");
+                        siglevelId.innerHTML = devices[Object.keys(devices)[i]]["siglevel"];
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="clock" id="clock"></div>
+        <div class="devicelist" id="devicelist">
+        </div>
+    </body>
+</html>

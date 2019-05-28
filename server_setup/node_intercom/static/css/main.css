@@ -1,0 +1,377 @@
+html, body:not(.nohover) tr:hover {
+	Margin:0;
+    Padding:0;
+    background: #000000;
+	-webkit-font-smoothing: subpixel-antialiased;
+}
+
+@font-face {
+	font-family: OpenSans-CondBold;
+	src: url('../fonts/OpenSans-CondBold.ttf');
+}
+@font-face {
+    font-family: OpenSans-CondLight;
+	src: url('../fonts/OpenSans-CondLight.ttf');
+}
+
+.clock {
+    width: 120px;
+    font-family: OpenSans-CondBold;
+    color: #FF851B;
+    font-size: 14px;
+    position: absolute;
+    text-align: left;
+}
+
+.devicelist {
+    position: absolute;
+    font-family: OpenSans-CondLight;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.devicebox_0ch {
+    overflow: hidden;
+    float:left;
+    width: 1078px;
+    min-height: 50px;
+    max-height: 50px;
+    margin-right: 10px;
+    margin-bottom: 2px;
+    font-family: OpenSans-Light;
+    font-size: 12px;
+    color: #5c5c5c;
+    background-image: url("../img/node_device_bg_ch0.png");
+    background-repeat: no-repeat;
+}
+.devicebox_1ch {
+    overflow: hidden;
+    float:left;
+    width: 1078px;
+    min-height: 50px;
+    max-height: 50px;
+    margin-right: 10px;
+    margin-bottom: 2px;
+    font-family: OpenSans-Light;
+    font-size: 12px;
+    color: #5c5c5c;
+    background-image: url("../img/node_device_bg_ch1.png");
+    background-repeat: no-repeat;
+}
+.devicebox_2ch {
+    overflow: hidden;
+    float:left;
+    width: 1078px;
+    min-height: 50px;
+    max-height: 50px;
+    margin-right: 10px;
+    margin-bottom: 2px;
+    font-family: OpenSans-Light;
+    font-size: 12px;
+    color: #5c5c5c;
+    background-image: url("../img/node_device_bg_ch2.png");
+    background-repeat: no-repeat;
+}
+.devicebox_3ch {
+    overflow: hidden;
+    float:left;
+    width: 580px;
+    min-height: 140px;
+    max-height: 140px;
+    margin-right: 10px;
+    margin-bottom: 2px;
+    font-family: OpenSans-Light;
+    font-size: 12px;
+    color: #5c5c5c;
+    background-image: url("../img/node_device_bg_ch3.png");
+    background-repeat: no-repeat;
+}
+.devicebox_4ch {
+    overflow: hidden;
+    float:left;
+    width: 580px;
+    min-height: 140px;
+    max-height: 140px;
+    margin-right: 10px;
+    margin-bottom: 2px;
+    font-family: OpenSans-Light;
+    font-size: 12px;
+    color: #5c5c5c;
+    background-image: url("../img/node_device_bg_ch4.png");
+    background-repeat: no-repeat;
+}
+.devicebox_5ch {
+    overflow: hidden;
+    float:left;
+    width: 580px;
+    min-height: 210px;
+    max-height: 210px;
+    margin-right: 10px;
+    margin-bottom: 2px;
+    font-family: OpenSans-Light;
+    font-size: 12px;
+    color: #5c5c5c;
+    background-image: url("../img/node_device_bg_ch5.png");
+    background-repeat: no-repeat;
+}
+.devicebox_6ch {
+    overflow: hidden;
+    float:left;
+    width: 580px;
+    min-height: 210px;
+    max-height: 210px;
+    margin-right: 10px;
+    margin-bottom: 2px;
+    font-family: OpenSans-Light;
+    font-size: 12px;
+    color: #5c5c5c;
+    background-image: url("../img/node_device_bg_ch6.png");
+    background-repeat: no-repeat;
+}
+.devicebox_7ch {
+    overflow: hidden;
+    float:left;
+    width: 580px;
+    min-height: 210px;
+    max-height: 210px;
+    margin-right: 10px;
+    margin-bottom: 2px;
+    font-family: OpenSans-Light;
+    font-size: 12px;
+    color: #5c5c5c;
+    background-image: url("../img/node_device_bg_ch7.png");
+    background-repeat: no-repeat;
+}
+.devicebox_8ch {
+    overflow: hidden;
+    float:left;
+    width: 1078px;
+    min-height: 50px;
+    max-height: 50px;
+    margin-right: 10px;
+    margin-bottom: 2px;
+    font-family: OpenSans-Light;
+    font-size: 12px;
+    color: #5c5c5c;
+    background-image: url("../img/node_device_bg_ch8.png");
+    background-repeat: no-repeat;
+}
+.db_device{
+    font-family: OpenSans-CondLight;
+    font-size: 14px;
+    color: #FF851B;
+    position: relative;
+    left: -462px;
+    top: 27px;
+    text-align: center;
+}
+.db_role{
+    font-family: OpenSans-CondLight;
+    font-size: 14px;
+    color: #FF851B;
+    position: relative;
+    left: -385px;
+    top: 8px;
+    text-align: center;
+}
+.db_status{
+    position: relative;
+    top: -32px;
+    left: 193px;
+    width:38px;
+}
+.db_setup{
+    position: relative;
+    top: -65px;
+    left: 240px;
+    width:20px;
+}
+.db_setup_icon{
+    width: 21px;
+    height:20px;
+    display:block;
+    margin: 5px 5px;
+    background:transparent url('../img/setup.png') center top no-repeat;
+}
+.db_setup_icon:hover{
+    background:transparent url('../img/setup_over.png') center top no-repeat;
+}
+.db_siglev{
+    font-family: OpenSans-CondLight;
+    font-size: 14px;
+    color: #FF851B;
+    position: relative;
+    left: -231px;
+    top:-77px;
+    text-align: center;
+}
+.db_sigqual{
+    font-family: OpenSans-CondLight;
+    font-size: 14px;
+    color: #FF851B;
+    position: relative;
+    left: -155px;
+    top:-96px;
+    text-align: center;
+}
+.db_ch1{
+    font-family: OpenSans-CondLight;
+    font-size: 14px;
+    color: #FF851B;
+    position: relative;
+    left: -77px;
+    top:-115px;
+    text-align: center;
+}
+.db_ch2{
+    font-family: OpenSans-CondLight;
+    font-size: 14px;
+    color: #FF851B;
+    position: relative;
+    left: 0px;
+    top:-134px;
+    text-align: center;
+}
+.db_ch3{
+    font-family: OpenSans-CondLight;
+    font-size: 14px;
+    color: #FF851B;
+    position: relative;
+    left: 77px;
+    top:-153px;
+    text-align: center;
+}
+.db_ch4{
+    font-family: OpenSans-CondLight;
+    font-size: 14px;
+    color: #FF851B;
+    position: relative;
+    left: 154px;
+    top:-172px;
+    text-align: center;
+}
+.db_ch5{
+    font-family: OpenSans-CondLight;
+    font-size: 14px;
+    color: #FF851B;
+    position: relative;
+    left: 232px;
+    top:-191px;
+    text-align: center;
+}
+.db_ch6{
+    font-family: OpenSans-CondLight;
+    font-size: 14px;
+    color: #FF851B;
+    position: relative;
+    left: 308px;
+    top:-210px;
+    text-align: center;
+}
+.db_ch7{
+    font-family: OpenSans-CondLight;
+    font-size: 14px;
+    color: #FF851B;
+    position: relative;
+    left: 385px;
+    top:-229px;
+    text-align: center;
+}
+.db_ch8{
+    font-family: OpenSans-CondLight;
+    font-size: 14px;
+    color: #FF851B;
+    position: relative;
+    left: 462px;
+    top:-248px;
+    text-align: center;
+}
+.db_ch_talk{
+    color: #01FF70;
+}
+.config{
+    position: absolute;
+    font-family: OpenSans-Light;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.roleDrop{
+    color: #FF851B;
+    font-family: OpenSans-CondLight;
+    -webkit-font-smoothing: antialiased;
+    font-size: 16px;
+}
+.roleDrop select{
+    background: #000000;
+    color:#FF851B;
+    text-shadow:0 1px 0 rgba(0,0,0,0.4);
+}
+.roledrop select option {
+    margin: 40px;
+    background: #000000;
+    color: #FF851B;
+}
+.roledrop select[selected] {
+    background: #000000;
+    color: #FF851B;
+}
+.assignIntercom{
+    color: #FF851B;
+    font-family: OpenSans-CondLight;
+    -webkit-font-smoothing: antialiased;
+    font-size: 16px;
+    margin-left: 150px;
+    margin-top: -134px;
+}
+.deviceTable{
+    color: #FF851B;
+    font-family: OpenSans-CondLight;
+    font-size: 16px;
+}
+.deviceTable table {
+    border-collapse: collapse;
+    overflow: hidden;
+}
+.assignIntercom button {
+    margin-left: 9px;
+    background-color: #FF851B;
+    border: none;
+    color: #000000;
+    padding: 5px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: OpenSans-CondBold;
+    font-size: 14px;
+    cursor: pointer;
+}
+.deviceTable table td {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    position: relative;  
+}
+.deviceTable input[type=checkbox] {
+    display:none;
+}
+.deviceTable input[type=checkbox] + label
+{
+    background: #001f3f;
+    height: 10px;
+    width: 10px;
+    display:inline-block;
+    padding: 0 0 0 10px;
+}
+.deviceTable input[type=checkbox]:checked + label
+{
+    background: #FF851B;
+    height: 10px;
+    width: 10px;
+    display:inline-block;
+    padding: 0 0 0 10px;
+}
+p {
+    padding-left: 10px;
+}
