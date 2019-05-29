@@ -8,13 +8,15 @@ Since this project is based on unlicense license I thought saving it for future 
 ![Image](https://inside.arcada.fi/wp-content/uploads/2019/01/Nicke-intercom-650x348.png)
 
 ## What it's for
-
 Event production teams large and small with limited budget. Pro intercom solutions are very reliable but at the same time very expensive. Walkie-talkie PMR or UHF radios are OK, but they lack full-duplex partyline communication. And full duplex audio communication is a must for live TV production teams and also for coordination teams on medium and large events. 
 
 ## How does it work
 The soultion allows multichannel live full duplex communication over wifi networks (expect approx. 100 ms latency) utilizing [Mumble communication protocol](https://wiki.mumble.info/wiki/Protocol). The system has been tested with 12 beltpacks and 4 base stations, but should work with larger networks.
+A single endpoint needs ~60 kb/s bandwidth, beltpacks are known to run for +18 hours on a single charge.
 
 ## Room for improvements
 - MPTCP and/or dual interface networking with gracefull failover (3G/4G + wifi)
 - vibration alarm on call
 - screensaver mode preventing OLED screen burn-in
+- 'unlatch all' master base station button for rapid 'radio space' cleanup
+- tally integration (vMix & ATEM)
