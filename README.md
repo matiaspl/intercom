@@ -1,5 +1,5 @@
 # intercom
-A githubbed version of DIY intercom system based on Mumble voice chat server and headless client running on Raspberry Pi 3's based beltpacks.
+A githubbed version of DIY intercom system based on Mumble voice chat server and headless client running on Raspberry Pi 3's based beltpacks. It has been developed in [Institutionen för Kultur och Media](https://www.arcada.fi/sv/forskning/institutionen-kultur-och-media), [Arcada UAS](https://www.arcada.fi/en), Finland and funded by the university fund for technical education and research, TUF (Fonden för teknisk utbildning och forskning).
 
 https://inside.arcada.fi/kultur-och-media/made-in-arcada-an-open-access-diy-intercom-system/
 
@@ -9,10 +9,10 @@ Since this project is based on unlicense license I thought saving it for future 
 
 ## What it's for
 
-Event production teams large and small with limited budget. Pro intercom solutions are very reliable but at the same time very expensive. Walkie-talkie PMR or UHV radios are OK, but they lack full-duplex partyline communication. And full duplex audio communication is a must for live TV production teams and also for coordination teams on medium and large events. 
+Event production teams large and small with limited budget. Pro intercom solutions are very reliable but at the same time very expensive. Walkie-talkie PMR or UHF radios are OK, but they lack full-duplex partyline communication. And full duplex audio communication is a must for live TV production teams and also for coordination teams on medium and large events. 
 
 ## How does it work
-The soultion allows multichannel live full duplex communication over wifi networks (expect approx. 100 ms latency) utilizing Mumble communication protocol. The system has been tested with 12 beltpacks and 4 base stations, but should work with larger networks.
+The soultion allows multichannel live full duplex communication over wifi networks (expect approx. 100 ms latency) utilizing Mumble() communication protocol. The system has been tested with 12 beltpacks and 4 base stations, but should work with larger networks.
 
 ## Room for improvements
 - MPTCP and/or dual interface networking with gracefull failover (3G/4G + wifi)
