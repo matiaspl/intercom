@@ -1,7 +1,7 @@
 # intercom
 A githubbed version of DIY intercom system based on Murmur voice chat server and headless Mumble client running on Raspberry Pi 3 based beltpacks. It has been developed in [Institutionen för Kultur och Media](https://www.arcada.fi/sv/forskning/institutionen-kultur-och-media), [Arcada UAS](https://www.arcada.fi/en), Finland and funded by the university fund for technical education and research, TUF (Fonden för teknisk utbildning och forskning).
 
-https://inside.arcada.fi/kultur-och-media/made-in-arcada-an-open-access-diy-intercom-system/
+For more in-depth information head to https://inside.arcada.fi/kultur-och-media/made-in-arcada-an-open-access-diy-intercom-system/
 
 Since this project is based on unlicense license I thought saving it for future generations is worth 10 minutes of my time. I'm not an author nor am I in any way connected to the development (yet!). 
 
