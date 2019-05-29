@@ -1,10 +1,11 @@
 Files in this folder
 
+ic_basestation_pi3 - Python 3 files for basestation
+
 basestation_rpi3.fzz - Fritzing breadboard view of basestation
 basestation_rpi3_hardware_installation.pdf - Hardware installation guide
 basestation_v3.f3d - Fusion 360 3D case for basestation
 Gerber_PCB_20181218104959.zip - Gerber files for Basestation connector PCB
-ic_basestation_pi3.zip - Python 3 files for basestation
 README.txt - This file
 setup_basestation_rpi3.pdf - Software installation guide
 UNLICENSE - License information
