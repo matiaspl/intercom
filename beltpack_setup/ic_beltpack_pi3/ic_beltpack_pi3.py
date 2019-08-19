@@ -51,11 +51,16 @@ deviceHostName = socket.gethostname()
 ### INITIALIZE GPIO AND ACTIVATE PULL DOWN ON INPUTS
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
-### Power Off buttons
-powPort = 37
+### OUTPUTS
+v33Ports = (37,38)
+GPIO.setup(v33Ports, GPIO.OUT)
+### SET HIGH (3.3V)
+GPIO.output(v33Ports, 1)
+### POWER OFF PIN
+powPort = 35
 GPIO.setup(powPort, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-### PTT buttons
-pttPorts = (38,40)
+### PTT PINS
+pttPorts = (36,40)
 GPIO.setup(pttPorts, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 mqttStatus = 3
