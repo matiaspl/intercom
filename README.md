@@ -1,11 +1,11 @@
 # intercom
 A githubbed version of DIY intercom system based on Murmur voice chat server and headless Mumble client running on Raspberry Pi 3 based beltpacks. It has been originally developed by Niclas Hallgren of [Institutionen för Kultur och Media](https://www.arcada.fi/sv/forskning/institutionen-kultur-och-media), [Arcada UAS](https://www.arcada.fi/en), Finland and funded by the university fund for technical education and research, TUF (Fonden för teknisk utbildning och forskning).
 
-For more in-depth information head to https://inside.arcada.fi/kultur-och-media/made-in-arcada-an-open-access-diy-intercom-system/ for a writeup by the author himself.
+For more in-depth information head to https://web.archive.org/web/20231202153422/https://inside.arcada.fi/kultur-och-media/made-in-arcada-an-open-access-diy-intercom-system/ (courtesy of WebArchive) for a writeup by the author himself.
 
 Since this project is based on unlicense license I thought saving it for future generations is worth 10 minutes of my time. I'm not the author nor am I in any way connected to the development (yet!). 
 
-![Image](https://inside.arcada.fi/wp-content/uploads/2019/01/Nicke-intercom-650x348.png)
+[![IArcada Intercom](http://img.youtube.com/vi/14hbYhLjQ8Y/0.jpg)](https://www.youtube.com/watch?v=14hbYhLjQ8Y "Youtube Clip")
 
 ## What it's for
 Providing communication for event production teams large and small with limited budget. Pro intercom solutions are very reliable but at the same time very expensive. Walkie-talkie PMR or UHF radios are OK and inexpensive, but they lack full-duplex partyline communication. And full duplex audio communication is a must for live TV production teams and for coordination teams on medium and large events. 
